@@ -1,42 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="static/css/master.css">
-    <title></title>
-  </head>
-  <body>
+{% extends "index.html" %}
 
-    <script type="text/javascript">
-      function system_page_clicked(){
-        window.location.href = '/system'
-      }
-      function task_manager_page_clicked(){
-        window.location.href = '/task_manager'
-      }
-      function trolling_message_page_clicked(){
-        window.location.href = '/trolling_message'
-      }
-    </script>
-
-    <div class="header">
-        <div class="header_btn_left" onclick="system_page_clicked()">
-          System page
+{% block content %}
+    <div class="form_wrapper">
+        {% for process in processes %}
+        <div class="btn_kill">
+          <span class="btn_kill_id"> {{ process.ProcessId }} </span>
+          <span class="btn_kill_name"> {{ process.Name }} </span>
         </div>
-        <div class="header_btn_middle" onclick="task_manager_page_clicked()">
-          Task manager page
-        </div>
-        <div class="header_btn_right" onclick="trolling_message_page_clicked()">
-          Trolling message page
-        </div>
+        {% endfor %}
     </div>
-        <div class="form_wrapper">
-            {% for process in processes %}
-            <div class="btn_kill">
-              <span class="btn_kill_id"> {{ process.ProcessId }} </span>
-              <span class="btn_kill_name"> {{ process.Name }} </span>
-            </div>
-            {% endfor %}
-        </div>
-  </body>
-</html>
+{% endblock %}

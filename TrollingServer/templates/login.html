@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+
+{% block content %}
+  <div class="center">
+    <form class="loginform" action="/login" method="post">
+        <input type="text" name="login" placeholder="Login">
+        <input type="password" name="password" placeholder="Password">
+        <button type="submit" name="button">LOGIN</button>
+        <input type="checkbox" name="rememberme">
+    </form>
+  </div>
+{% endblock %}

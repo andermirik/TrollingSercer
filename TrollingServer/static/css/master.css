@@ -74,3 +74,70 @@ button{
   background-color: #a2231d;
   cursor:pointer;
 }
+
+.main_wrapper {
+  height: calc(100% - 50px);
+  overflow-y: scroll;
+  margin-left: 7.5%;
+  margin-right: 10%;
+  width: 85%;
+}
+.center {
+  position: relative;
+  height: auto;
+  width: 200px;
+  top: 250px;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
+
+.loginform input[type="text"] {
+  height: 25px;
+  width: 200px;
+  margin-top: 1px;
+  border: none;
+  border-bottom: 1px solid silver;
+}
+.loginform input[type="text"]:focus {
+  border: none;
+  border-bottom: 1px solid green;
+  outline-width: 0;
+}
+
+.loginform input[type="password"] {
+  height: 25px;
+  width: 200px;
+  margin-top: 5px;
+  border: none;
+  border-bottom: 1px solid silver;
+}
+
+.loginform input[type="password"]:focus {
+  border: none;
+  border-bottom: 1px solid green;
+  outline-width: 0;
+}
+
+
+.loginform input[type="checkbox"] {
+  height: 18px;
+  margin-top: 5px;
+  margin-left: -90px;
+  text-align: right;
+}
+
+.loginform input[type="checkbox"]::before {
+  content: "Remember me";
+  height: 18px;
+  margin-top: 5px;
+}
+
+.loginform button {
+  background-color: green;
+  border: none;
+  margin-top: 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: #0367B5;
+}
