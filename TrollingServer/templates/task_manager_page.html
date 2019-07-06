@@ -1,11 +1,25 @@
 {% extends "index.html" %}
 
 {% block content %}
+    <script type="text/javascript">
+      function kill_clicked(self){
+        console.log(self)
+        var xhr = new XMLHttpRequest();
+        var body = self.innerHTML;
+        console.log(body)
+
+        xhr.open("POST", '/task_manager_kill_process', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.send(body);
+        self.parentNode.parentNode.removeChild(self.parentNode)
+      }
+    </script>
     <div class="form_wrapper">
         {% for process in processes %}
         <div class="btn_kill">
-          <span class="btn_kill_id"> {{ process.ProcessId }} </span>
-          <span class="btn_kill_name"> {{ process.Name }} </span>
+          <div class="btn_kill_name"> {{ process.Name }} </div>
+          <div class="btn_kill_id" onclick="kill_clicked(this)"> {{ process.ProcessId }} </div>
         </div>
         {% endfor %}
     </div>

@@ -29,39 +29,71 @@ def user_loader(login):
 
 c = wmi.WMI()
 processes = c.Win32_Process()
+kill_list = []
+need_to_update = False;
+
 def process_thread():
+    global need_to_update
+    global processes
     print('started')
     while True:
         try:
             pythoncom.CoInitialize()
-            print('check')
             c = wmi.WMI()
-            processes = c.Win32_Process()
-            time.sleep(60)
+            if need_to_update:
+                print('updating')
+                processes = c.Win32_Process()
+                need_to_update = False
+            print(kill_list)
+
+            if len(kill_list) != 0:
+                id = kill_list[0]
+                print(id)
+                for process in processes:
+                    if process.ProcessId == id:
+                        process.Terminate()
+                kill_list.remove(id)
+                need_to_update = True
+
+            time.sleep(1)
         finally:
             pythoncom.CoUninitialize()
 
 thread = threading.Thread(target=process_thread)
 thread.start()
 
+
+
 @app.route("/")
 def index():
-    return render_template('index.html', processes = processes)
+    return render_template('index.html')
 
 @app.route("/trolling_message")
 @login_required
 def trolling_message_page():
-    return render_template('trolling_message_page.html', processes = processes)
+    return render_template('trolling_message_page.html')
 
 @app.route("/system")
 @login_required
 def system_page():
-    return render_template('system_page.html', processes = processes)
+    return render_template('system_page.html')
 
 @app.route("/task_manager")
 @login_required
 def task_manager_page():
+    global need_to_update
+    global processes
+    need_to_update = True
     return render_template('task_manager_page.html', processes = processes)
+
+@app.route("/task_manager_kill_process", methods = ['POST'])
+@login_required
+def kill_process():
+    id = int(request.get_data())
+
+    kill_list.append(id)
+
+    return redirect(url_for('task_manager_page'))
 
 @app.route("/login")
 def login():
@@ -89,7 +121,7 @@ def shutdown():
     os.system('shutdown /s /t 0')
     return redirect(url_for('system_page'))
 
-app.run(host='0.0.0.0', port=27003, debug=True)
+app.run(host='0.0.0.0', port=27003)
 
 
 

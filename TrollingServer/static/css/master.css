@@ -14,7 +14,6 @@ button{
 .form_wrapper {
   width: 400px;
   height: 100px;
-  /*border: solid silver 1px;*/
   margin-left: 50%;
   margin-top: 5%;
   transform: translate(-50%, -5%);
@@ -22,6 +21,26 @@ button{
 
 .btn_kill {
   height: 30px;
+  line-height: 30px;
+  width: 300px;
+  margin-top: 3px;
+}
+.btn_kill:hover {
+  background-color: #6699cc;
+}
+
+.btn_kill_id {
+  float: left;
+  padding-left: 5px;
+  width: 50px;
+  user-select: none; 
+}
+.btn_kill_id:hover {
+  background-color: #366b91;
+}
+.btn_kill_name {
+  float: left;
+  width: 250px;
 }
 
 .header {
